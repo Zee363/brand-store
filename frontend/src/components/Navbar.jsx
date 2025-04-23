@@ -35,8 +35,9 @@ const Navbar = () => {
               <Link to="/about" className="nav-link">About</Link>
             </li>
           </ul>
-          <div className="d-lg-flex col-lg-3 justify-content-lg-end">
-           <Link to="/login"><button className="btn btn-primary">Login</button></Link>
+          <div className="d-lg-flex col-lg-3 justify-content-lg-end gap-2">
+           <Link to="/signup"><button className="btn btn-primary">Sign Up</button></Link>
+           <Link to="/login"><button className="btn btn-primary">Log In</button></Link>
           </div>
         </div>
       </div>
