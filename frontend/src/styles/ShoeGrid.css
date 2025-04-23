@@ -1,0 +1,15 @@
+.shoe-grid {
+    padding: 24px;
+  }
+  
+  .shoe-grid h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .shoe-grid .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+  }
