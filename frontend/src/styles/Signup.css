@@ -1,0 +1,77 @@
+.signup-container{
+    width: 700px;
+    margin-top: 60px !important;
+    margin: 0 auto;
+    background: url('https://images.theconversation.com/files/303723/original/file-20191126-180279-gvmxgl.jpg?ixlib=rb-4.1.0&rect=0%2C0%2C6989%2C4892&q=45&auto=format&w=926&fit=clip');
+    border-radius: 29px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .signup-container form {
+    box-sizing: border-box;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: brightness(60%);
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: -4px;   
+}
+
+  .form-h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .signup-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    
+  }
+  
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .last-buttons {
+    margin-top: 25px;
+    text-align: center;
+  }
+  
+  
+  
+  .button-par a:hover {
+    text-decoration: underline;
+  }
+  
