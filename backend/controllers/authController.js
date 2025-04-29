@@ -32,6 +32,14 @@ exports.register = async (req, res) => {
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
+
+    const { _id, name: userName, email: userEmail, brand: userBrand, role: userRole } = newUser;
+
+    res.status(201).json({
+        user: { _id, name: userName, email: userEmail, brand: userBrand, role: userRole },
+        token,
+    });
+    
 }
 
 // Login a user
@@ -47,8 +55,15 @@ exports.login = async (req, res) => {
 
         const token = createToken(user);
         res.status(200).json({ user, token });
-    }
-    catch (error) {
-        res.status(400).json({ error: error.message });
-    }
+
+        const { _id, name, email: userEmail, brand, role } = user;
+
+        res.status(200).json({
+            user: { _id, name, email: userEmail, brand, role },
+            token,
+          });
+        } catch (error) {
+          res.status(400).json({ error: error.message });
+        }
+      
 };
