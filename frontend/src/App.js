@@ -8,22 +8,21 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar /> 
-
+      <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
-        <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/shoes" element={<ShoeGrid />} />
-        <Route path="/shoe/:id" element={<Shoecards />} />
+        <Route path="/sidebar" element={<Sidebar />}></Route>
+       
       </Routes>
       </BrowserRouter>  
     </div>

@@ -16,7 +16,7 @@ try {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, error }),
+        body: JSON.stringify({ email, password }),
     });
 
      const data = await response.json();
@@ -29,7 +29,12 @@ try {
       } else {
         alert("Login successful!");
         console.log("User logged in:", data.user); 
-        console.log("Token:", data.token); 
+        localStorage.setItem("token", data.token); 
+        console.log("Token:", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user)); 
+        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("brand", data.user.brand);
+        window.location.href = "/"; 
       }
     } catch (error) {
         console.error("Error:", error);
@@ -39,7 +44,7 @@ try {
 
   return (
     <div className="login-container">
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className='login-form'>
         <h2 className="form-h2">LOG IN</h2>
         <div className="form-group">
           <label htmlFor="email">Email</label>
