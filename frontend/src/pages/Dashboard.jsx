@@ -7,6 +7,7 @@ import ShoeGrid from "../components/ShoeGrid";
 import "../styles/Sidebar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Dashboard.css";  
+import BackButton from "../components/BackArrow";
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ const Dashboard = () => {
      description: "",
      size: "",
      price: "",
+     brand: "",
 });
     
     const [shoes, setShoes] = useState(() => {
@@ -31,7 +33,7 @@ const Dashboard = () => {
     image: "",
     description: "",
     size: "",
-    brandId: "",
+    brand: "",
     price: "",
   });
 
@@ -42,9 +44,10 @@ const Dashboard = () => {
 
       try {
         const decodedToken = jwtDecode(token);
+        console.log("Decoded Token:", decodedToken);
         setCurrentUser(decodedToken); 
 
-        const response = await axios.get("http://localhost:5002/admin/users", {
+        const response = await axios.get("http://localhost:5002/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           }
@@ -66,39 +69,49 @@ const Dashboard = () => {
   
     const handleCreateShoe = async (e) => {
     e.preventDefault();
-
-    const brandId = currentUser.role === "brand_user" ? currentUser.brandId : newShoe.brandId;
+    
     if (!currentUser || (currentUser.role !== "brand_user" && currentUser.role !== "super_admin")) {
       alert("You are not authorized to create shoes.");
       return;
     }
 
+    
     const token = localStorage.getItem("token");
+
+    const brand = currentUser.role === "brand_user" ? currentUser.brand : newShoe.brand;
+
+    if (currentUser.role === "super_admin" && !brand) {
+      console.log("Please enter a brand for the shoe.");
+      alert("Super admin must provide a brand.");
+      return;
+    }
+
+    const shoeToSend = { ...newShoe, brand}; 
+    console.log("SENDING SHOE:", shoeToSend);
 
 
     try {
-      const response = await axios.post("http://localhost:5002/shoes/create", newShoe,
-        {
+
+      const response = await axios.post("http://localhost:5002/shoes/create", shoeToSend, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-    const addShoe = response.data;
-    console.log(newShoe);
-    
-        setShoes([...shoes, addShoe]);
+    const addedShoe = response.data;
+    console.log("Shoe added:", addedShoe);
+
+    setShoes((prevShoes) => [...prevShoes, addedShoe]);
         
         // reset form fields
         setNewShoe({
-            id: "",
             name: "",
-            price: "",
-            brandId: "",
+            image: "",
             description: "",
             size: "",
-            image: "",
+            brand: "",
+            price: "",
         });
       } catch (error) {
         console.error("Error creating shoe:", error);
@@ -106,18 +119,17 @@ const Dashboard = () => {
       }
     };
 
-  const handleEditShoe = async (id) => {  
-   
+  const handleEditShoe = async (shoeId) => {  
     try {
-      const shoe = shoes.find((shoe) => shoe.id === id);
+      const shoe = shoes.find((shoe) => shoe._id === shoeId);
 
       if (!shoe) {
         alert("Shoe not found");
         return;
       } 
 
-      if ( currentUser.role === "brand_user" || shoe.brandId === currentUser.brandId ) {
-      setEditingShoeId(id);
+      if (currentUser.role === "super_admin" || (currentUser.role === "brand_user" && shoe.brand === currentUser.brand)) {
+      setEditingShoeId(shoeId);
       setEditedShoe(shoe);
     } else {
       alert("You are not authorized to edit this shoe.");
@@ -145,7 +157,7 @@ const Dashboard = () => {
     // Update the shoes state locally
     setShoes((prevShoes) =>
       prevShoes.map((shoe) =>
-        shoe.id === editingShoeId ? { ...shoe, ...editedShoe } : shoe
+        shoe._id === editingShoeId ? { ...shoe, ...editedShoe } : shoe
       )
     );  
 
@@ -156,6 +168,7 @@ const Dashboard = () => {
       description: "",
       size: "",
       price: "",
+      brand: "",
     });
 
   } catch (error) {
@@ -181,7 +194,7 @@ const handleDelete = async (shoeId) => {
     console.log("Shoe deleted successfully:", response.data);
 
     // Update local state by filtering out deleted shoe
-    setShoes((prevShoes) => prevShoes.filter((shoe) => shoe.id !== shoeId));
+    setShoes((prevShoes) => prevShoes.filter((shoe) => shoe._id !== shoeId));
     
   } catch (error) {
     console.error("Error deleting shoe:", error);
@@ -195,10 +208,10 @@ const handleDelete = async (shoeId) => {
     return (
         <div style={{ display: "flex", minHeight: "100vh" }}>
         <Sidebar />
+        <BackButton />
   
         <div style={{ padding: "1rem" }}>
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h2>Dashboard</h2>
          </div>
 
          {/* Form to create a new shoe */}
@@ -252,11 +265,12 @@ const handleDelete = async (shoeId) => {
               <input
                 type="text"
                 className="form-control"
-                placeholder="brand"
-                value={newShoe.brandId}
-                onChange={(e) =>
-                  setNewShoe({ ...newShoe, brandId: e.target.value })
-                }
+                placeholder="Brand"
+                value={newShoe.brand || ""}
+                onChange={(e) => {
+                  console.log("Typed brand:", e.target.value);
+                  setNewShoe({ ...newShoe, brand: e.target.value });
+                }}
               />
             </div>
             <div className="col-12" >
@@ -283,8 +297,8 @@ const handleDelete = async (shoeId) => {
           <div className="row">
             <ShoeGrid shoes={shoes} onEdit={handleEditShoe}/>
             {shoes.map((shoe) => (
-            <div className="col-md-3" key={shoe.id}>
-              {editingShoeId === shoe.id ? (
+            <div className="col-md-3" key={shoe._id}>
+              {editingShoeId === shoe._id ? (
                 <form onSubmit={handleUpdateShoe}>
                   <input
                     type="text"
@@ -318,7 +332,7 @@ const handleDelete = async (shoeId) => {
                   <button type="button" className="btn btn-secondary btn-sm" onClick={() => setEditingShoeId(null)}>Cancel</button>
                 </form>
               ) : (
-                <ShoeCard shoe={shoe} onEdit={() => handleEditShoe(shoe.id)} onDelete={() => handleDelete(shoe.id)} />
+                <ShoeCard shoe={shoe} onEdit={() => handleEditShoe(shoe._id)} onDelete={() => handleDelete(shoe._id)} />
               )}
             </div>
           ))}

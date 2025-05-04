@@ -22,23 +22,19 @@ const Sidebar = () => {
 
     return (
         <div className="sidebar p-3 text-white" style={{ minHeight: "90vh" }}>
-      <ul className="nav flex-column">
+        <ul className="nav flex-column">
         <li className="nav-item mb-2">
-        <Link to="/about"><i class="bi bi-house-door"></i></Link>
+        <Link to="/"><i class="bi bi-house-door"></i>Home</Link>
+        </li>
+        <li className="nav-item mb-2">
+          <Link to="/about" className="nav-link text-white"><i className="bi bi-info-circle me-2"></i>About</Link>
         </li>
 
-        {role === 'brand_user' && (
-          <>
-            <li><Link to="">Adidas</Link></li>
-            <li><Link to="">Nike</Link></li>
-            <li><Link to="">Puma</Link></li>
-            <li><Link to="">Reebok</Link></li>
-          </>
-        )}
 
+        {/* Role-based Links */}
         {role === 'super_admin' && (
           <>
-            <li><Link to="/admin-users">Manage Users</Link></li>
+            <li><Link to="/users">Manage Users</Link></li>
             <li><Link to="/">All Shoes</Link></li>
           
             <li className="mt-3">
@@ -58,6 +54,12 @@ const Sidebar = () => {
             </li>
           </>
         )}
+
+         {/* Auth Links */}
+         <li className="nav-item mt-4">
+          <Link to="/signup" className="btn btn-outline-light w-100 mb-2">Sign Up</Link>
+          <Link to="/login" className="btn btn-outline-light w-100 mb-2">Log In</Link>
+        </li>
 
         <li>
         <Link to="/logout" className="text-danger"><i className="bi bi-box-arrow-left me-2"></i></Link>

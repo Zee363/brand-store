@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import "../styles/Signup.css";
 
@@ -10,6 +10,22 @@ const Signup = () => {
         brand: "",
         role:"",
     });
+
+    const [brands, setBrands] = useState([]);
+
+    useEffect(() => {
+        const fetchBrands = async () => {
+          try {
+            const response = await fetch("http://localhost:5002/brands");
+            const data = await response.json();
+            setBrands(data);
+          } catch (error) {
+            console.error("Error fetching brands:", error);
+          }
+        };
+    
+        fetchBrands();
+      }, []);
 
      const handleChange = (e) => {
         const { name, value } = e.target;
@@ -70,12 +86,13 @@ const Signup = () => {
                     <option value="Nike">Nike</option>
                     <option value="Adidas">Adidas</option>
                     <option value="Puma">Puma</option>
+                    <option value="Reebok">Reebok</option>
                     </select>
                 </div>
                 <div className="form-group">
                  <label htmlFor="role">Role</label>
                  <select name="role" id="role" value={formData.role} onChange={handleChange} required>
-                 <option value="">Select a Role</option>
+                 <option value="brand">Select a Role</option>
                  <option value="brand_user">Brand User</option>
                  <option value="super_admin">Super Admin</option>
                 </select>

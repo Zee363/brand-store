@@ -1,10 +1,12 @@
 import React from "react";
 import "../styles/About.css";
-
+import BackButton from "../components/BackArrow";
+import "../styles/BackButton.css";
 
 const About = () => {
     return (
         <div className="about-container container-fluid">
+            <BackButton />
             <img src="/about-pic.webp" alt="multiple sneakers" />
             <h1> About Stride Select</h1> <br />
             <h2>Mission Statement</h2>

@@ -1,0 +1,19 @@
+.back-button {
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.5rem;
+    color: #333333cb;
+    cursor: pointer;
+    padding: 0;
+    display: inline !important;
+  }
+  
+  .back-button:hover {
+    color: #000;
+  }
+  
+  
+  i {
+    font-size: xx-large;
+    border: none;
+  }

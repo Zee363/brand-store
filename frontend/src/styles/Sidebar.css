@@ -12,16 +12,16 @@
 }
  
 .sidebar i {
-  margin-top: 200px;
+  margin-top: 90px;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px; 
-  width: 40px; 
+ 
   height: 40px; 
   font-size: 2em;
   color: #000000; 
+  width: 40px; 
 }
   
   .sidebar ul {
@@ -29,9 +29,6 @@
     padding: 0;
   }
   
-  .sidebar li {
-    margin: 1rem 0;
-  }
   
   .sidebar a {
     color: #fff;
