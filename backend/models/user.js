@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
    brand: {
-        type: [String],
+        type: String,
         enum: ['Nike', 'Adidas', 'Puma', 'Reebok'],
     },
     role: {

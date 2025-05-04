@@ -9,9 +9,9 @@ const shoeSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Shoe price is required"],
   },
-  brandId: {
+  brand: {
     type: String,
-    required: [true, "Brand is required"],
+    enum: ['Nike', 'Adidas', 'Puma', 'Reebok'],
   },
   size: {
     type: Number,

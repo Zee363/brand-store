@@ -5,16 +5,16 @@ const jwt = require("jsonwebtoken");
 // Create a JWT token
 const createToken = (user) => {
     return jwt.sign(
-        { id: user._id, role: user.role, brand: user.brand },
-        process.env.JWT_SECRET,
-        { expiresIn: "4d" }
+      { id: user._id, role: user.role, brand: user.brand },
+      process.env.JWT_SECRET, { expiresIn: "1d" }
     );
-};
+  };
+  
 
 // Register a new user
 exports.register = async (req, res) => {
-    const { name, email, password, brand, role } = req.body;
-
+    const { name, email, password, role, brand } = req.body;
+    
     try {
         const userExists = await User.findOne({ email });
         if (userExists) return res.status(400).json({ message: 'User already exists' });
@@ -27,18 +27,25 @@ exports.register = async (req, res) => {
             brand,
             role: role || 'brand_user', 
         });
+        
         const token = createToken(newUser);
-        res.status(201).json({ user: newUser, token });
+        console.log("Token payload during registration:", {
+        id: newUser._id,
+        role: newUser.role,
+        brand: newUser.brand,
+        });
+
+
+        const { _id, name: userName, email: userEmail, brand: userBrand, role: userRole } = newUser;
+        
+        res.status(201).json({
+            user: { _id, name: userName, email: userEmail, brand: userBrand, role: userRole },
+            token,
+        });
+        
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
-
-    const { _id, name: userName, email: userEmail, brand: userBrand, role: userRole } = newUser;
-
-    res.status(201).json({
-        user: { _id, name: userName, email: userEmail, brand: userBrand, role: userRole },
-        token,
-    });
     
 }
 
@@ -54,7 +61,12 @@ exports.login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Wrong email or password entered.' });
 
         const token = createToken(user);
-        res.status(200).json({ user, token });
+        console.log("Token payload during login:", {
+          id: user._id,
+          role: user.role,
+          brand: user.brand,
+        });
+        
 
         const { _id, name, email: userEmail, brand, role } = user;
 

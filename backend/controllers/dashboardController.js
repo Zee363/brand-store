@@ -8,14 +8,14 @@ exports.getDashboardData = async (req, res) => {
       }
 
 
-    const { role, brand } = req.user; // Extract role and brand from the token payload
+    const { role, brandId } = req.user;
     try { 
         if (role === "super_admin") {
             const allShoes = await Shoe.find();
             res.status(200).json(allShoes);
             console.log("All shoes:", allShoes);
           } else if (role === "brand_user") {
-            const brandShoes = await Shoe.find({ brand });
+            const brandShoes = await Shoe.find({ brandId });
             res.status(200).json(brandShoes);
           } else {
             res.status(403).json({ message: "Unauthorized role" });
@@ -26,35 +26,34 @@ exports.getDashboardData = async (req, res) => {
         }
     };
 
-    exports.createShoe = async (req, res) => {
-        try {
-          const { name, price, size, description, image, brandId } = req.body;
-          const { role } = req.user;
+ exports.createShoe = async (req, res) => {
+    console.log("User info:", req.user); 
 
-          // Allow only brand_user role to create shoes
-          if (req.user.role !== "brand_user") {
-            return res.status(403).json({ message: "Unauthorized: Only brand users can create shoes" });
-          }
-      
-          // Validate required fields
-          if (!name || !price || !size || !brandId || !description || !image) {
-            return res.status(400).json({ message: "All fields are required" });
-          }
-      
-          // Create shoe with brand from user info
-          const newShoe = await Shoe.create({
-            name,
-            price,
-            size,
-            description,
-            image,
-            brandId,
-          });
-      
-          res.status(201).json(newShoe);
-        } catch (error) {
-          console.error("Error creating shoe:", error);
-          res.status(500).json({ message: "Error creating shoe" });
-        }
-      };
-      
+    try {
+        const { name, price, size, description, image } = req.body;
+        let brandId;
+
+    if (req.user.role === 'super_admin') {
+      brandId = req.body.brandId;
+      if (!brandId) {
+        return res.status(400).json({ message: 'Brand ID is required for super_admin' });
+      }
+    } else if (req.user.role === 'brand_user') {
+      brandId = req.user.brandId;
+    }
+        const newShoe = await Shoe.create({
+          name,
+          price,
+          brandId,
+          size,
+          description,
+          image,
+        });
+  
+        res.status(201).json(newShoe);
+      } catch (error) {
+        res.status(500).json({ message: "Error creating shoe" });
+      }
+  };  
+
+ 

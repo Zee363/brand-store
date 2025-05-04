@@ -9,5 +9,6 @@ router.put('/shoes/update/:id', authenticateToken, shoeController.updateShoe);
 router.put('/shoes/edit/:id', authenticateToken, shoeController.editShoe);
 router.get('/shoes/edit/:id', authenticateToken, shoeController.editShoe);
 router.delete('/shoes/delete/:id', authenticateToken, shoeController.deleteShoe);
+router.get('/brands', shoeController.getAllBrands);
 
 module.exports = router;
