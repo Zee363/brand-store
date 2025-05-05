@@ -28,7 +28,7 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/dashboard', authenticateToken, getDashboardData); 
 app.use('/shoes/delete/:id', authenticateToken, shoeController.deleteShoe);
-app.use('/brands', authenticateToken, getAllBrands);
+
 
 
 
