@@ -48,7 +48,7 @@ const Dashboard = () => {
         console.log("Decoded Token:", decodedToken);
         setCurrentUser(decodedToken); 
 
-        const response = await axios.get(`${process.env.REACT_APP__BACKEND_PORT}/dashboard`, {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_PORT}/dashboard`, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
