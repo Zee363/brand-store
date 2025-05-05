@@ -21,11 +21,7 @@ const Dashboard = () => {
      brand: "",
 });
     
-    const [shoes, setShoes] = useState(() => {
-    const storedShoes = localStorage.getItem("shoes");
-    return storedShoes ? JSON.parse(storedShoes) : [];
-
-  });
+    const [shoes, setShoes] = useState([]);
 
   const [newShoe, setNewShoe] = useState({
     name: "",
