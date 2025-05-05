@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import Sidebar from "../components/Sidebar";
 import ShoeCard from "../components/Shoecards";
 import ShoeGrid from "../components/ShoeGrid";
+import "../styles/ShoeGrid.css";
 import "../styles/Sidebar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Dashboard.css";  
@@ -216,6 +217,7 @@ const handleDelete = async (shoeId) => {
 
          {/* Form to create a new shoe */}
         <form onSubmit={handleCreateShoe} className="mb-4  dashboard-form">
+        <h3 style={{textAlign: "center", fontStyle: "italic"}}>Create Your Own Shoe!</h3>
           <div className="row">
             <div className="col-12">
               <input
@@ -285,9 +287,7 @@ const handleDelete = async (shoeId) => {
               />
             </div>
             <div className="col-12">
-              <button type="submit" className="btn btn-secondary">
-                Add
-              </button>
+              <button type="submit" className="btn btn-secondary">Add</button>
             </div>
           </div>
         </form>
@@ -297,7 +297,7 @@ const handleDelete = async (shoeId) => {
           <div className="row">
             <ShoeGrid shoes={shoes} onEdit={handleEditShoe}/>
             {shoes.map((shoe) => (
-            <div className="col-md-3" key={shoe._id}>
+            <div className="col-md-3 edit-cards" key={shoe._id}>
               {editingShoeId === shoe._id ? (
                 <form onSubmit={handleUpdateShoe}>
                   <input

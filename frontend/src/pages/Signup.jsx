@@ -11,22 +11,6 @@ const Signup = () => {
         role:"",
     });
 
-    const [brands, setBrands] = useState([]);
-
-    useEffect(() => {
-        const fetchBrands = async () => {
-          try {
-            const response = await fetch("http://localhost:5002/brands");
-            const data = await response.json();
-            setBrands(data);
-          } catch (error) {
-            console.error("Error fetching brands:", error);
-          }
-        };
-    
-        fetchBrands();
-      }, []);
-
      const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -65,8 +49,8 @@ const Signup = () => {
 
         return (
             <div className="signup-container container-fluid">
-               <form onSubmit={handleSubmit}>
-                <h2 className="form-h2">SIGN UP</h2>
+               <form onSubmit={handleSubmit} className="signup-form">
+                <h2 className="form-h2">Create an Account</h2>
                <div className="form-group">
                 <label htmlFor="name">Full Name</label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required/>

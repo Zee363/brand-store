@@ -1,13 +1,13 @@
 .shoe-card {
-    background-color: white;
+    background-color: #C39898 !important;
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease-in-out;
   }
   
-  .shoe-card h2 {
+  .shoe-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
     margin-top: 16px;
@@ -15,7 +15,7 @@
   
   .shoe-card p {
     font-size: 0.875rem;
-    color: #666;
+    color: black;
     margin: 8px 0;
   }
   
@@ -26,23 +26,29 @@
     font-size: 1.125rem;
   }
   
-  /* Hover Effect on ShoeCard */
-  .shoe-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+
 
   .edit-button {
-    background-color: #052a33;
+    background-color: #5F6769;
     color: #faefef;
     border: none;
     gap: 10px;
     width: 100px;
   }
+
+  .edit-button:hover {
+    background-color: #3C4245 !important;
+    color: #faefef;
+  }
   
   .delete-button {
-    background-color: #410309 !important; 
+    background-color: #561C24 !important; 
     color: white;
     width: 100px;
     border: none;
+  }
+
+  .delete-button:hover {
+    background-color: #B03052 !important;
+    color: #faefef;
   }

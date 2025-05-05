@@ -1,8 +1,17 @@
+body {
+  background-color: #F8EDE3;
+}
+
+.edit-cards {
+margin-left: -36px !important;
+}
+
 .dashboard-form {
+    margin-left: 180px !important;
     margin: 2rem auto;
-    padding: 2rem;
+    padding: 2.5rem;
     max-width: 600px;
-    background-color: #f9f9f9;
+    background-color: #C39898;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
@@ -26,7 +35,7 @@
   
   .dashboard-form .btn-secondary {
     width: 100%;
-    background-color: #6c757d !important;
+    background-color: #944E63 !important;
     border: none;
     color: white;
     transition: background-color 0.3s ease;

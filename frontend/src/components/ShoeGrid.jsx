@@ -19,7 +19,7 @@ const ShoeGrid = ({ onEdit, onDelete }) => {
   const [shoes, setShoes] = useState(shoesData);
   
   return (
-    <div className="p-6">
+    <div className="shoe-grid p-6">
       <div className="row">
         {shoes.map((shoe) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={shoe.id}>

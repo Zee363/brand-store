@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100px;
-  background-color: #D6C0B3; 
+  background-color: #944E63; 
   padding: 10px 8px;
   height: 350vh;
   border-radius: 10px; 
@@ -17,7 +17,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
- 
   height: 40px; 
   font-size: 2em;
   color: #000000; 
@@ -29,6 +28,27 @@
     padding: 0;
   }
   
+  .sidebar .home {
+   margin-top: 40px;
+  }
+
+  .sidebar .about-label {
+    margin-top: 10px;
+  }
+
+  li .nav-item {
+    margin-left: 15px !important;
+  }
+
+  .sidebar .manage-users {
+    margin-bottom: 10px;
+  }
+
+ .sidebar .switch-arrows{
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
   
   .sidebar a {
     color: #fff;
@@ -37,6 +57,19 @@
   }
   
   .sidebar a:hover {
-    color: #ffc107;
+    color: black;
+  }
+
+  .sidebar .signup-button, .login-button {
+    background-color: #5a6268;
   }
   
+  .login-button:hover {
+    background-color: white;
+    color: #5a6268;
+  }
+
+  .signup-button:hover {
+    background-color: white;
+    color: #5a6268;
+  }
