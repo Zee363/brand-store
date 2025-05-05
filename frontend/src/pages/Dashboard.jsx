@@ -217,7 +217,7 @@ const handleDelete = async (shoeId) => {
 
 
     return (
-        <div style={{ display: "flex", minHeight: "100vh" }}>
+        <div style={{ display: "flex", minHeight: "100vh" }} className="container-fluid">
         <Sidebar />
         <BackButton />
   

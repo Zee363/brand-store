@@ -43,7 +43,7 @@ try {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container container-fluid">
       <form onSubmit={handleLogin} className='login-form'>
         <h2 className="form-h2">LOG IN</h2>
         <div className="form-group">

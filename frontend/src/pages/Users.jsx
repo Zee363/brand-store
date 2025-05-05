@@ -50,7 +50,7 @@ const Users = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 container-fluid">
         <BackButton />
       <h2 className="mb-4">Manage Users</h2>
       <table className="table table-striped">

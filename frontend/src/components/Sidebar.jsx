@@ -21,7 +21,7 @@ const Sidebar = () => {
     
 
     return (
-        <div className="sidebar p-3 text-white" style={{ minHeight: "90vh" }}>
+        <div className="sidebar p-3 text-white container-fluid" style={{ minHeight: "90vh" }}>
         <ul className="nav flex-column">
         <li className="nav-item mb-2">
         <Link to="/" className="nav-link text-white home-label"><i className="bi bi-house-door home"></i>Home</Link>
