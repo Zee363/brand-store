@@ -12,7 +12,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5002/admin/users", {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_PORT}/admin/users`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUsers(res.data);
