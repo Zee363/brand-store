@@ -36,16 +36,18 @@ const Sidebar = () => {
           <>
             <Link to="/users" className="nav-link text-white"><i class="bi bi-people-fill manage-users"></i>Manage Users</Link>
             
+            
           
             <li className="mt-3">
               <label htmlFor="brand-select" className="form-label nav-link text-white"><i className="bi bi-arrow-left-right switch-arrows"></i>Switch Brands</label>
               <select
                 id="brand-select"
                 value={selectedBrand}
-                onChange={handleBrandChange}
+                onChange={(e) => { const newBrand = e.target.value; localStorage.setItem("selectedBrand", newBrand); setSelectedBrand(newBrand); window.location.reload(); }}
                 className="form-select"
               >
                 <option value="">Select Brand</option>
+                <option value="All Brands">All Brands</option>
                 <option value="Nike">Nike</option>
                 <option value="Adidas">Adidas</option>
                 <option value="Puma">Puma</option>
