@@ -77,7 +77,6 @@ if (selectedBrand && selectedBrand !== "All Brands") {
 }
 
 
-
   if (loading) {
     return <div className="text-center">Loading shoes...</div>;
   }
