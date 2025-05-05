@@ -1,13 +1,4 @@
 const Shoe = require("../models/shoe");
-
-  exports.getAllBrands = async (req, res) => {
-    try {
-      const brands = await Shoe.find();
-      res.status(200).json(brands);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching brands" });
-  }
-};
  
   exports.createShoe = async (req, res) => {
       console.log("User info:", req.user); 

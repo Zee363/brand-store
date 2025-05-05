@@ -4,10 +4,12 @@ body {
 
 .edit-cards {
 margin-left: -36px !important;
+gap: 24px !important;
 }
 
 .dashboard-form {
     margin-left: 180px !important;
+    gap: 44px !important;
     margin: 2rem auto;
     padding: 2.5rem;
     max-width: 600px;

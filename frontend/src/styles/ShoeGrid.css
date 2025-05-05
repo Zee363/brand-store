@@ -1,6 +1,7 @@
 .shoe-grid {
     padding: 24px;
     margin-left: -46px !important;
+    gap: 24px !important;
   }
   
   .shoe-grid h3 {
@@ -12,5 +13,5 @@
   .shoe-grid .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 24px;
+    gap: 24px !important;
   }

@@ -3,8 +3,6 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Sidebar from "../components/Sidebar";
 import ShoeCard from "../components/Shoecards";
-import ShoeGrid from "../components/ShoeGrid";
-import "../styles/ShoeGrid.css";
 import "../styles/Sidebar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Dashboard.css";  
@@ -38,6 +36,7 @@ const Dashboard = () => {
     price: "",
   });
 
+  
   useEffect(() => {
     const fetchData = async () => {
     const token = localStorage.getItem("token");
@@ -66,6 +65,22 @@ const Dashboard = () => {
   
       fetchData();
   }, []);
+
+  const selectedBrand = localStorage.getItem("selectedBrand") || currentUser?.brand || "";
+
+  let filteredShoes = shoes;
+
+if (selectedBrand && selectedBrand !== "All Brands") {
+  filteredShoes = shoes.filter(
+    (shoe) => shoe.brand?.toLowerCase() === selectedBrand.toLowerCase()
+  );
+}
+
+
+
+  if (loading) {
+    return <div className="text-center">Loading shoes...</div>;
+  }
 
   
     const handleCreateShoe = async (e) => {
@@ -292,42 +307,21 @@ const handleDelete = async (shoeId) => {
           </div>
         </form>
 
-  
-
-          <div className="row">
-            <ShoeGrid shoes={shoes} onEdit={handleEditShoe}/>
-            {shoes.map((shoe) => (
+        <div className="row" style={{gap: "44px"}}>
+          {filteredShoes.map((shoe) => (
             <div className="col-md-3 edit-cards" key={shoe._id}>
               {editingShoeId === shoe._id ? (
                 <form onSubmit={handleUpdateShoe}>
-                  <input
-                    type="text"
-                    className="form-control mb-1"
-                    value={editedShoe.name}
-                    onChange={(e) => setEditedShoe({ ...editedShoe, name: e.target.value })}
-                    placeholder="Shoe Name"
-                  />
-                  <input
-                    type="text"
-                    className="form-control mb-1"
-                    value={editedShoe.image}
-                    onChange={(e) => setEditedShoe({ ...editedShoe, image: e.target.value })}
-                    placeholder="Image URL"
-                  />
-                  <input
-                    type="text"
-                    className="form-control mb-1"
-                    value={editedShoe.description}
-                    onChange={(e) => setEditedShoe({ ...editedShoe, description: e.target.value })}
-                    placeholder="Description"
-                  />
-                  <input
-                    type="number"
-                    className="form-control mb-1"
-                    value={editedShoe.price}
-                    onChange={(e) => setEditedShoe({ ...editedShoe, price: e.target.value })}
-                    placeholder="Price"
-                  />
+                  {["name", "image", "description", "price"].map((field) => (
+                    <input
+                      key={field}
+                      type={field === "price" ? "number" : "text"}
+                      className="form-control mb-1"
+                      value={editedShoe[field]}
+                      onChange={(e) => setEditedShoe({ ...editedShoe, [field]: e.target.value })}
+                      placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                    />
+                  ))}
                   <button type="submit" className="btn btn-success btn-sm me-2">Update</button>
                   <button type="button" className="btn btn-secondary btn-sm" onClick={() => setEditingShoeId(null)}>Cancel</button>
                 </form>
@@ -342,4 +336,5 @@ const handleDelete = async (shoeId) => {
   );
 };
 
+          
 export default Dashboard;

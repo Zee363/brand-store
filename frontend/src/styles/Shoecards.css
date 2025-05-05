@@ -5,6 +5,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease-in-out;
+    gap: 24px !important;
   }
   
   .shoe-card h3 {
