@@ -1,4 +1,5 @@
-import React, {useState,useEffect} from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/Signup.css";
 
@@ -10,6 +11,9 @@ const Signup = () => {
         brand: "",
         role:"",
     });
+
+    const navigate = useNavigate();
+
 
      const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,7 +28,7 @@ const Signup = () => {
             console.log("Form submitted:", formData);  
             
             try {
-                const response = await fetch("http://localhost:5002/register", {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_PORT}/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -40,6 +44,8 @@ const Signup = () => {
 
                 const data = await response.json();
                 console.log(data);
+ 
+                navigate('/login');
             }
             catch (error) {
                 console.error("Error:", error);

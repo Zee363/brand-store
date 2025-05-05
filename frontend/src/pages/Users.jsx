@@ -37,7 +37,7 @@ const Users = () => {
   
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5002/admin/delete/users/${userId}`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_PORT}/admin/delete/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
   

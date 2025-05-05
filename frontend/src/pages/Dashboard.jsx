@@ -48,7 +48,7 @@ const Dashboard = () => {
         console.log("Decoded Token:", decodedToken);
         setCurrentUser(decodedToken); 
 
-        const response = await axios.get("http://localhost:5002/dashboard", {
+        const response = await axios.get(`${process.env.REACT_APP__BACKEND_PORT}/dashboard`, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
@@ -93,7 +93,7 @@ const Dashboard = () => {
 
     try {
 
-      const response = await axios.post("http://localhost:5002/shoes/create", shoeToSend, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_PORT}/shoes/create`, shoeToSend, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -147,7 +147,7 @@ const Dashboard = () => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await axios.put(`http://localhost:5002/shoes/update/${editingShoeId}`, editedShoe, {
+    const response = await axios.put(`${process.env.REACT_APP_BACKEND_PORT}/shoes/update/${editingShoeId}`, editedShoe, {
       headers: {
         Authorization: `Bearer ${token}`,
       }
@@ -186,7 +186,7 @@ const handleDelete = async (shoeId) => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await axios.delete(`http://localhost:5002/shoes/delete/${shoeId}`, {
+    const response = await axios.delete(`${process.env.REACT_APP_BACKEND_PORT}/shoes/delete/${shoeId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
