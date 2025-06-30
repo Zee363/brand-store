@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# Brand Shoe Store - Role-Based Dashboard App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge&logo=vercel)](https://brand-store-hjuu.vercel.app/)
 
-## Available Scripts
+This is a full-stack role-based shoe store dashboard built with **React.js** for the frontend and **Node.js/Express** for the backend. The app allows users to view, create, edit, and delete shoes depending on their role (`super_admin` or `brand_user`).
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Authentication** with JWT
+- **Role-Based Access Control**:
+  - `super_admin` can manage all brands
+  - `brand_user` can only manage shoes within their brand
+- **CRUD Operations** for Shoes (Create, Read, Update, Delete)
+- **Brand Switching** for super admins
+- Clean and responsive UI built with **Bootstrap**
+- Backend integration with secure API endpoints
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+### Frontend
+- React.js
+- React Router
+- Bootstrap 5
+- Axios
+- JWT Decode
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend (see backend repo if separate)
+- Node.js
+- Express.js
+- MongoDB (or any database used)
+- Mongoose
+- JSON Web Tokens (JWT)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Pages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Auth
+- `/signup` — Create new user
+- `/login` — User login
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Main
+- `/` — Home page (Dashboard)
+- `/about` — About section
 
-### `npm run eject`
+### Admin Panel
+- `/users` — Manage users (super_admin only)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧭 Role Behaviors
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Role         | Can View | Can Create | Can Edit | Can Delete | Can Switch Brands |
+|--------------|----------|------------|----------|------------|-------------------|
+| Super Admin  |  All   |  All     | All   | All     | Yes             |
+| Brand User   |  Own   |  Own     | Own   | Own     | No              |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+├── backend/
+│ ├── controllers/
+│ ├── models/
+│ ├── routes/
+│ ├── middlewares/
+│ ├── .env
+│ └── server.js
+└── frontend/
+├── src/
+│ ├── components/
+│ ├── pages/
+│ ├── styles/
+│ ├── utils/
+│ └── App.js
+├── .env
+└── package.json
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## How to Run This Project Locally
 
-### Analyzing the Bundle Size
+### Backend Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### 1. Navigate to the backend folder:
+cd backend
 
-### Making a Progressive Web App
+#### 2. Install backend dependencies:
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### 3. Create .env file and add the following:
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
 
-### Advanced Configuration
+#### 4. Start backend server:
+npm run dev
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Frontend Setup
 
-### Deployment
+#### 1.Navigate to the frontend folder:
+cd frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### 2. Install frontend dependencies:
+npm install
 
-### `npm run build` fails to minify
+#### 3. Create .env file in the frontend/ folder:
+REACT_APP_BACKEND_PORT=http://localhost:5000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### 4. Start the React app:
+npm start
+
+### API Endpoints
+Method      Endpoint        Description
+GET         /dashboard	    Fetch all shoes
+POST	    /shoes/create	Add a new shoe
+PUT	      /shoes/update/:id	Update a shoe
+DELETE	  /shoes/delete/:id	Delete a shoe
+POST	    /auth/signup	Register new user
+POST	   /auth/login	    User login
+
+### Future Improvements
+- Cloud image uploads
+
+- Pagination & search
+
+- User activity logs
+
+- Admin analytics dashboard
+
+- Form validation
+

@@ -26,7 +26,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// middlewares/authMiddleware.js
+
 const authorizeRoles = (...allowedRoles) => {
     return (req, res, next) => {
       if (!req.user || !allowedRoles.includes(req.user.role)) {
