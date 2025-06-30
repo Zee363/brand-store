@@ -34,7 +34,7 @@ const Sidebar = () => {
         {/* Role-based Links */}
         {role === 'super_admin' && (
           <>
-            <Link to="/users" className="nav-link text-white"><i class="bi bi-people-fill manage-users"></i>Manage Users</Link>
+            <Link to="/users" className="nav-link text-white"><i className="bi bi-people-fill manage-users"></i>Manage Users</Link>
             
             
           
